@@ -21,14 +21,6 @@ START_TEXT = """
 Halo! Selamat datang di Disaa Apps ⭑.ᐟ
 Trusted Premium Seller dengan proses cepat & aman.
 
-╭─ ✦ MENU ✦ ─╮
-⌞ Streaming
-⌞ Editing
-⌞ Music & AI
-⌞ Informasi
-⌞ Order
-╰──────────╯
-
 ── ⋆⋅☆⋅⋆ ──
 
 ୨ৎ Trusted Premium Seller
@@ -38,7 +30,7 @@ Trusted Premium Seller dengan proses cepat & aman.
 """
 
 STREAMING_TEXT = """
-→ APLIKASI STREAMING
+#Pricelist APLIKASI STREAMING
 
 ⠀⠀ᝰ.ᐟ Netflix
 ⤿ sharing 1u 1d :: Rp 5.000
@@ -92,7 +84,7 @@ STREAMING_TEXT = """
 """
 
 EDITING_TEXT = """
-→ APK EDITING
+#Pricelist APK EDITING
 
 ⠀⠀ᝰ.ᐟ Canva
 ⤿ member 1 hari :: Rp 500
@@ -122,60 +114,46 @@ EDITING_TEXT = """
 ⤿ private 1 year IOS :: Rp 10.000
 """
 
-MUSIC_TEXT = """
-→ MUSIC NEED'S ⭑.ᐟ
-
-⠀⠀ᝰ.ᐟ Spotify
-⤿ famplan 1 bulan :: Rp 25.000
+MUSIC_TEXT = """ 
+#Pricelist MUSIC NEED'S ⭑.ᐟ
+⠀⠀ᝰ.ᐟ Spotify 
+⤿ famplan 1 bulan :: Rp 25.000 
 ⤿ indiplan 1 bulan :: Rp 30.000
 
-⠀⠀ᝰ.ᐟ Apple Music
+⠀⠀ᝰ.ᐟ Apple Music 
 ⤿ imess 1 bulan :: Rp 10.000
 
-⠀⠀ᝰ.ᐟ ChatGPT
-⤿ sharing 1 bulan nogar :: Rp 10.000
+── ⋆⋅☆⋅⋆ ──
+
+#Pricelist OTHER NEED'S ⭑.ᐟ
+⠀⠀ᝰ.ᐟ ChatGPT 
+⤿ sharing 1 bulan nogar :: Rp 10.000 
 ⤿ sharing 1 bulan fullgar :: Rp 20.000
 
-⠀⠀ᝰ.ᐟ Gemini AI
-⤿ via Invite 1b :: Rp 12.000
-⤿ via Invite 2b :: Rp 18.000
-⤿ via Invite 3b :: Rp 25.000
+⠀⠀ᝰ.ᐟ Gemini AI 
+⤿ via Invite 1b :: Rp 12.000 
+⤿ via Invite 2b :: Rp 18.000 
+⤿ via Invite 3b :: Rp 25.000 
 ⤿ via Invite 4b :: Rp 30.000
 
-⠀⠀ᝰ.ᐟ Get Contact
-⤿ Premium 1b :: Rp 15.000
+⠀⠀ᝰ.ᐟ Get Contact 
+⤿ Premium 1b :: Rp 15.000 
 ⤿ Cek Nomor GTC :: Rp 10.000
 
-⠀⠀ᝰ.ᐟ Grok AI
-⤿ 7 Hari Private :: Rp 15.000
+⠀⠀ᝰ.ᐟ Grok AI 
+⤿ 7 Hari Private :: Rp 15.000 
 ⤿ 14 Hari Private :: Rp 25.000
-"""
 
-INFO_TEXT = """
-📑 inform's
+── ⋆⋅☆⋅⋆ ──
+୨ৎ Harga dapat berubah sewaktu-waktu
+୨ৎ Tanyakan stok sebelum order
+୨ৎ Garansi sesuai masa aktif """
 
-• kode b = bulan
-• kode d = day (hari)
-• kode y/t = tahun
-• harga dapat berubah sewaktu-waktu
-• harap tanyakan stok sebelum order
-• fast respon & fast proses
-• garansi sesuai masa aktif
-• order = setuju dengan syarat & ketentuan
-• yang tidak ada di list bisa tanyakan admin
-
-━━━━━━━━━━━━━━
-୨ৎ Trusted Premium Seller
-୨ৎ Fast Response & Process
-୨ৎ Bergaransi Sesuai Ketentuan
-୨ৎ Open Reseller & Dropship
-━━━━━━━━━━━━━━
-"""
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         ["✦ Streaming", "✦ Editing"],
-        ["✦ Music & AI", "✦ Informasi"],
-        ["✦ Order"],
+        ["✦ Other Apps"],
+        ["✦ Order & Inform"],
     ]
 
     reply_markup = ReplyKeyboardMarkup(
@@ -198,13 +176,10 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif text == "✦ Editing":
         await update.message.reply_text(EDITING_TEXT)
 
-    elif text == "✦ Music & AI":
+    elif text == "✦ Other Apps":
         await update.message.reply_text(MUSIC_TEXT)
 
-    elif text == "✦ Informasi":
-        await update.message.reply_text(INFO_TEXT)
-
-    elif text == "✦ Order":
+    elif text == "✦ Order & Inform":
         keyboard = [
             [
                 InlineKeyboardButton(
@@ -218,15 +193,23 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         await update.message.reply_text(
             """
-୨ৎ Ready to Order?
+୨ৎ Order & Information ⭑.ᐟ
 
-Format Order:
-⤿ Produk:
-⤿ Durasi:
-⤿ Email:
-⤿ Pembayaran:
+📑 inform's
+• kode b = bulan
+• kode d = day (hari)
+• kode y/t = tahun
+• harga dapat berubah sewaktu-waktu
+• harap tanyakan stok sebelum order
+• garansi sesuai masa aktif produk
+• produk nogar tidak memiliki garansi
+• wajib mengirim bukti login untuk aktivasi garansi
+• akun yang sudah berhasil login tidak dapat dibatalkan atau direfund
+• order = dianggap telah membaca dan menyetujui seluruh syarat & ketentuan
 
-Klik tombol di bawah untuk menghubungi admin.
+── ⋆⋅☆⋅⋆ ──
+
+Untuk melakukan order atau menanyakan produk, silakan hubungi admin melalui tombol di bawah ini 🤍
             """,
             reply_markup=reply_markup
         )
