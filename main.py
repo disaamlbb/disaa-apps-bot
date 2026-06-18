@@ -255,7 +255,7 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"""
 𓆩♡𓆪 Welcome to Disaa Premium Apps
 
-Halloww {.first_name} 🤍
+Halloww {member.first_name} 🤍
 
 silakan tekan /start yaa untuk melihat seluruh produk,
 pricelist, dan informasi yang tersedia...
