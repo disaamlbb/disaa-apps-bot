@@ -16,21 +16,22 @@ from telegram.ext import (
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 START_TEXT = """
-୨ৎ Welcome to Disaa Apps Store
+୨ৎ Welcome to our little digital space ♡
+         Disaa Premium Apps ⭑.ᐟ
 
-Halo! Selamat datang di Disaa Apps ⭑.ᐟ
-Trusted Premium Seller dengan proses cepat & aman.
+Tempat terbaik untuk kebutuhan premium apps dengan proses cepat, aman, dan terpercaya.
 
 ── ⋆⋅☆⋅⋆ ──
 
-୨ৎ Trusted Premium Seller
-୨ৎ Fast Response & Process
-୨ৎ Bergaransi Sesuai Ketentuan
-୨ৎ Open Reseller & Dropship
+✦ Trusted Premium Seller
+✦ Fast Response & Process
+✦ Bergaransi Sesuai Ketentuan
+
+── ⋆⋅☆⋅⋆ ──
 """
 
 STREAMING_TEXT = """
-#Pricelist APLIKASI STREAMING
+#Pricelist STREAMING APPS ─
 
 ⠀⠀ᝰ.ᐟ Netflix
 ⤿ sharing 1u 1d :: Rp 5.000
@@ -81,10 +82,14 @@ STREAMING_TEXT = """
 ⠀⠀ᝰ.ᐟ Vidio
 ⤿ sharing mobile 1 bulan :: Rp 25.000
 ⤿ private mobile 1 bulan :: Rp 35.000
-"""
+
+── ⋆⋅☆⋅⋆ ──
+୨ৎ Harga dapat berubah sewaktu-waktu
+୨ৎ Tanyakan stok sebelum order
+୨ৎ Garansi sesuai masa aktif"""
 
 EDITING_TEXT = """
-#Pricelist APK EDITING
+#Pricelist EDITING APPS ─
 
 ⠀⠀ᝰ.ᐟ Canva
 ⤿ member 1 hari :: Rp 500
@@ -112,10 +117,15 @@ EDITING_TEXT = """
 ⠀⠀ᝰ.ᐟ Alight Motion
 ⤿ private 1 year :: Rp 5.000
 ⤿ private 1 year IOS :: Rp 10.000
-"""
+
+── ⋆⋅☆⋅⋆ ──
+୨ৎ Harga dapat berubah sewaktu-waktu
+୨ৎ Tanyakan stok sebelum order
+୨ৎ Garansi sesuai masa aktif"""
 
 MUSIC_TEXT = """ 
-#Pricelist MUSIC NEED'S ⭑.ᐟ
+#Pricelist MUSIC NEED'S ─
+
 ⠀⠀ᝰ.ᐟ Spotify 
 ⤿ famplan 1 bulan :: Rp 25.000 
 ⤿ indiplan 1 bulan :: Rp 30.000
@@ -125,7 +135,8 @@ MUSIC_TEXT = """
 
 ── ⋆⋅☆⋅⋆ ──
 
-#Pricelist OTHER NEED'S ⭑.ᐟ
+#Pricelist OTHER NEED'S ─
+
 ⠀⠀ᝰ.ᐟ ChatGPT 
 ⤿ sharing 1 bulan nogar :: Rp 10.000 
 ⤿ sharing 1 bulan fullgar :: Rp 20.000
@@ -151,9 +162,9 @@ MUSIC_TEXT = """
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
-        ["✦ Streaming", "✦ Editing"],
-        ["✦ Other Apps"],
-        ["✦ Order & Inform"],
+        ["✦ Streaming ✦", "✦ Editing ✦"],
+        ["✦ Other Apps ✦"],
+        ["✦ Order & Inform ✦"],
     ]
 
     reply_markup = ReplyKeyboardMarkup(
@@ -170,20 +181,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
 
-    if text == "✦ Streaming":
+    if text == "✦ Streaming ✦":
         await update.message.reply_text(STREAMING_TEXT)
 
-    elif text == "✦ Editing":
+    elif text == "✦ Editing ✦":
         await update.message.reply_text(EDITING_TEXT)
 
-    elif text == "✦ Other Apps":
+    elif text == "✦ Other Apps ✦":
         await update.message.reply_text(MUSIC_TEXT)
 
-    elif text == "✦ Order & Inform":
+    elif text == "✦ Order & Inform ✦":
         keyboard = [
             [
                 InlineKeyboardButton(
-                    "✦ Chat Admin",
+                    "✦ Chat Admin @disaelyn ✦",
                     url="https://t.me/disaelyn"
                 )
             ]
@@ -209,7 +220,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 ── ⋆⋅☆⋅⋆ ──
 
-Untuk melakukan order atau menanyakan produk, silakan hubungi admin melalui tombol di bawah ini 🤍
+Untuk melakukan order atau menanyakan produk, silakan hubungi admin melalui tombol di bawah ini 🎀
             """,
             reply_markup=reply_markup
         )
