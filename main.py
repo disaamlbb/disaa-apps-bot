@@ -237,26 +237,32 @@ app.add_handler(
     )
 )
 
-if __name__ == "__main__":
-    app.run_polling(
-        allowed_updates=Update.ALL_TYPES
-        )
-
-from telegram import Update
-from telegram.ext import MessageHandler, filters
-
-async def welcome(update: Update, context):
+async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
     for member in update.message.new_chat_members:
+
+        keyboard = [
+            [
+                InlineKeyboardButton(
+                    "🛍 Buka Store",
+                    url="https://t.me/DisaaAppsBot"
+                )
+            ]
+        ]
+
+        reply_markup = InlineKeyboardMarkup(keyboard)
+
         await update.message.reply_text(
             f"""
 𓆩♡𓆪 Welcome to Disaa Premium Apps
 
-Halo {first} 🤍
+Halloww {.first_name} 🤍
 
-Silakan tekan /start untuk memulai dan melihat seluruh menu yang tersedia.
+silakan tekan /start yaa untuk melihat seluruh produk,
+pricelist, dan informasi yang tersedia...
 
 Happy shopping ♡
-"""
+""",
+            reply_markup=reply_markup
         )
 
 app.add_handler(
@@ -265,3 +271,8 @@ app.add_handler(
         welcome
     )
 )
+
+if __name__ == "__main__":
+    app.run_polling(
+        allowed_updates=Update.ALL_TYPES
+    )
