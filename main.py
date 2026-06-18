@@ -241,3 +241,27 @@ if __name__ == "__main__":
     app.run_polling(
         allowed_updates=Update.ALL_TYPES
         )
+
+from telegram import Update
+from telegram.ext import MessageHandler, filters
+
+async def welcome(update: Update, context):
+    for member in update.message.new_chat_members:
+        await update.message.reply_text(
+            f"""
+𓆩♡𓆪 Welcome to Disaa Premium Apps
+
+Halo {first} 🤍
+
+Silakan tekan /start untuk memulai dan melihat seluruh menu yang tersedia.
+
+Happy shopping ♡
+"""
+        )
+
+app.add_handler(
+    MessageHandler(
+        filters.StatusUpdate.NEW_CHAT_MEMBERS,
+        welcome
+    )
+)
