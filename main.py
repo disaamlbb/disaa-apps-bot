@@ -16,18 +16,9 @@ from telegram.ext import (
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 START_TEXT = """
-୨ৎ Welcome to our little digital space ♡
-         Disaa Premium Apps ⭑.ᐟ
+୨ৎ Disaa Premium Apps ⭑.ᐟ
 
-Tempat terbaik untuk kebutuhan premium apps dengan proses cepat, aman, dan terpercaya.
-
-── ⋆⋅☆⋅⋆ ──
-
-✦ Trusted Premium Seller
-✦ Fast Response & Process
-✦ Bergaransi Sesuai Ketentuan
-
-── ⋆⋅☆⋅⋆ ──
+Silakan pilih menu yang tersedia pada keyboard di bawah untuk melihat pricelist dan informasi lainnya yaaa...🎀
 """
 
 STREAMING_TEXT = """
@@ -240,20 +231,9 @@ app.add_handler(
 async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
     for member in update.message.new_chat_members:
 
-        keyboard = [
-            [
-                InlineKeyboardButton(
-                    "🛍 Buka Store",
-                    url="https://t.me/DisaaAppsBot"
-                )
-            ]
-        ]
-
-        reply_markup = InlineKeyboardMarkup(keyboard)
-
         await update.message.reply_text(
             f"""
-𓆩♡𓆪 Welcome to Disaa Premium Apps
+୨ৎ Welcome to Disaa Apps ♡
 
 Halloww {member.first_name} 🤍
 
