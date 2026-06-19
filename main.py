@@ -237,12 +237,11 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 Halloww {member.first_name} 🤍
 
-silakan tekan /start yaa untuk melihat seluruh produk,
-pricelist, dan informasi yang tersedia...
+Silakan ketik /start untuk melihat seluruh produk,
+pricelist, dan informasi yang tersedia.
 
 Happy shopping ♡
-""",
-            reply_markup=reply_markup
+"""
         )
 
 app.add_handler(
@@ -255,4 +254,6 @@ app.add_handler(
 if __name__ == "__main__":
     app.run_polling(
         allowed_updates=Update.ALL_TYPES
+    )
+PES
     )
