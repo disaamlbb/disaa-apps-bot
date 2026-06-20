@@ -250,7 +250,18 @@ app.add_handler(
         welcome
     )
 )
+async def get_file_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    file_id = update.message.photo[-1].file_id
 
+    await update.message.reply_text(
+        f"FILE ID:\n\n{file_id}"
+    )
+app.add_handler(
+    MessageHandler(
+        filters.PHOTO,
+        get_file_id
+    )
+)
 if __name__ == "__main__":
     app.run_polling(
         allowed_updates=Update.ALL_TYPES
