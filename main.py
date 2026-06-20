@@ -1,23 +1,25 @@
 import os
 from telegram import Update
 from telegram.ext import (
-ApplicationBuilder,
-CommandHandler,
-MessageHandler,
-ContextTypes,
-filters,
+    ApplicationBuilder,
+    CommandHandler,
+    MessageHandler,
+    ContextTypes,
+    filters,
 )
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+QRIS_FILE_ID = "AgACAgUAAxkBAAMJajZKvdsde8SQXr3LSEy0NV0KUewAAnYTaxvJiLlVGK0KlE61LaABAAMCAAN5AAM8BA"
 
 START_TEXT = """
 ୨ৎ 𓇼 Hello, {name} ♡
 
 Welcome to Disa Apps 🎀⭑.ᐟ
 
-୨୧ pricelist ─ /pl
-୨୧ format order ─ /form
-୨୧ testimonials ─ @disaaproofs
+  ୨୧ pricelist ─ /pl
+  ୨୧ format order ─ /form
+  ୨୧ testimonials ─ @disaaproofs
 
 ─────୨୧─────
 
@@ -32,18 +34,18 @@ PL_TEXT = """
 🎀 Premium Apps
 ୨୧ /streaming ─ Streaming Apps
 ୨୧ /editing ─ Editing Apps
-୨୧ /other ─ Music Apps, AI tools, dll
+୨୧ /other ─ Music Apps, AI Tools, dll
 
 ──────୨୧──────
 
 🎮 Top Up Games
-୨୧ /ff ─ diamond free fire
-୨୧ /ml ─ diamond mobile legends
+୨୧ /ff ─ Diamond Free Fire
+୨୧ /ml ─ Diamond Mobile Legends
 
 ──────୨୧──────
 
 📝 Order Menu
-୨୧ /form ─ format order
+୨୧ /form ─ Format Order
 
 ──────୨୧──────
 
@@ -61,7 +63,7 @@ FORM_TEXT = """
 ୨୧ Nama Apk :
 ୨୧ Jenis Apk :
 ୨୧ Durasi :
-୨୧ Payment : 💳 Pay Here
+୨୧ Payment : 💳 /pay
 ୨୧ Tag Admin : @disaelyn
 
 ──────୨୧──────
@@ -72,7 +74,7 @@ FORM_TEXT = """
 ୨୧ Jumlah Diamond :
 ୨୧ ID Game :
 ୨୧ Server :
-୨୧ Payment : 💳 Pay Here
+୨୧ Payment : 💳 /pay
 ୨୧ Tag Admin : @disaelyn
 
 ──────୨୧──────
@@ -82,7 +84,7 @@ FORM_TEXT = """
 ୨୧ Nama Telegram + Username :
 ୨୧ Jumlah Diamond :
 ୨୧ ID Game :
-୨୧ Payment : 💳 Pay Here
+୨୧ Payment : 💳 /pay
 ୨୧ Tag Admin : @disaelyn
 
 ──────୨୧──────
@@ -98,17 +100,27 @@ thank you for shopping at
 𓇼 Disa Apps ⭑.ᐟ 🎀
 """
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-name = update.effective_user.first_name
-await update.message.reply_text(
-START_TEXT.format(name=name)
-)
+PAY_TEXT = """
+୨ৎ Payment QRIS ⭑.ᐟ
 
-async def pl(update: Update, context: ContextTypes.DEFAULT_TYPE):
-await update.message.reply_text(PL_TEXT)
+♡ silakan melakukan pembayaran melalui QRIS di atas
+♡ kirim bukti transfer ke @disaelyn
+♡ sertakan format order dan bukti transfer saat menghubungi admin
 
-async def form(update: Update, context: ContextTypes.DEFAULT_TYPE):
-await update.message.reply_text(FORM_TEXT)
+──────୨୧──────
+
+୨ৎ 📌 Notes ⭑.ᐟ
+
+♡ mohon membaca ketentuan sebelum melakukan order
+♡ order = setuju dengan seluruh ketentuan yang berlaku
+♡ no refund setelah pesanan diproses
+♡ garansi mengikuti keterangan pada masing-masing produk
+♡ claim wajib disertai bukti berupa screenshot atau screen record
+♡ keterlambatan respon dapat terjadi di luar jam operasional admin
+
+thank you for shopping at
+𓇼 Disa Apps⭑.ᐟ 🎀
+"""
 STREAMING_TEXT = """
 ୨ৎ 📺 Streaming Apps ⭑.ᐟ
 
@@ -259,12 +271,6 @@ EDITING_TEXT = """
 thank you for shopping at
 𓇼 Disa Apps ⭑.ᐟ 🎀
 """
-
-async def streaming(update: Update, context: ContextTypes.DEFAULT_TYPE):
-await update.message.reply_text(STREAMING_TEXT)
-
-async def editing(update: Update, context: ContextTypes.DEFAULT_TYPE):
-await update.message.reply_text(EDITING_TEXT)
 OTHER_TEXT = """
 ୨ৎ 🤍 Other Apps ⭑.ᐟ
 
@@ -381,34 +387,54 @@ thank you for shopping at
 𓇼 Disa Apps ⭑.ᐟ 🎀
 """
 
+# =========================
+# HANDLER
+# =========================
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    name = update.effective_user.first_name
+    await update.message.reply_text(
+        START_TEXT.format(name=name)
+    )
+
+async def pl(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(PL_TEXT)
+
+async def form(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(FORM_TEXT)
+
+async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_photo(
+        photo=QRIS_FILE_ID,
+        caption=PAY_TEXT
+    )
+
+async def streaming(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(STREAMING_TEXT)
+
+async def editing(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(EDITING_TEXT)
+
 async def other(update: Update, context: ContextTypes.DEFAULT_TYPE):
-await update.message.reply_text(OTHER_TEXT)
+    await update.message.reply_text(OTHER_TEXT)
 
 async def ff(update: Update, context: ContextTypes.DEFAULT_TYPE):
-await update.message.reply_text(FF_TEXT)
+    await update.message.reply_text(FF_TEXT)
 
 async def ml(update: Update, context: ContextTypes.DEFAULT_TYPE):
-await update.message.reply_text(ML_TEXT)
+    await update.message.reply_text(ML_TEXT)
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
-await update.message.reply_text(
-"""
-୨ৎ command tidak ditemukan ♡
-
-silakan gunakan:
-୨୧ /pl
-୨୧ /form
-
-thank you for choosing
-𓇼 Disa Apps ⭑.ᐟ 🎀
-"""
-)
+    await update.message.reply_text(
+        "୨ৎ command tidak ditemukan ♡\n\nsilakan gunakan:\n୨୧ /pl\n୨୧ /form"
+    )
 
 app = ApplicationBuilder().token(BOT_TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("pl", pl))
 app.add_handler(CommandHandler("form", form))
+app.add_handler(CommandHandler("pay", pay))
 app.add_handler(CommandHandler("streaming", streaming))
 app.add_handler(CommandHandler("editing", editing))
 app.add_handler(CommandHandler("other", other))
@@ -416,10 +442,8 @@ app.add_handler(CommandHandler("ff", ff))
 app.add_handler(CommandHandler("ml", ml))
 
 app.add_handler(
-MessageHandler(filters.COMMAND, unknown)
+    MessageHandler(filters.COMMAND, unknown)
 )
 
-if name == "main":
-app.run_polling(
-allowed_updates=Update.ALL_TYPES
-)
+if __name__ == "__main__":
+    app.run_polling()
