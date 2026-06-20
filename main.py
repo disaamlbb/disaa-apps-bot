@@ -63,9 +63,28 @@ FORM_TEXT = """
 ୨୧ Nama Apk :
 ୨୧ Jenis Apk :
 ୨୧ Durasi :
-୨୧ Payment : 💳 /pay
 ୨୧ Tag Admin : @disaelyn
 </pre>
+୨୧ Payment : 💳 /pay
+
+──────୨୧──────
+<pre>
+🎀 (Khusus) Netflix Monitoring
+
+୨୧ Username Telegram :
+୨୧ No WhatsApp Aktif :
+୨୧ Email Aktif :
+୨୧ Device :
+(Hp / Laptop / iPad / TV / Tablet)
+୨୧ Merk Device :
+୨୧ Lokasi device :
+୨୧ Tanggal Order :
+୨୧ Jenis User :
+(1 User / Semi Private / Private)
+୨୧ Durasi Order :
+</pre>
+୨୧ Payment : 💳 /pay
+
 ──────୨୧──────
 <pre>
 🎀 Top Up Game ML
@@ -74,9 +93,10 @@ FORM_TEXT = """
 ୨୧ Jumlah Diamond :
 ୨୧ ID Game :
 ୨୧ Server :
-୨୧ Payment : 💳 /pay
 ୨୧ Tag Admin : @disaelyn
 </pre>
+୨୧ Payment : 💳 /pay
+
 ──────୨୧──────
 <pre>
 🎀 Top Up Game FF
@@ -84,9 +104,10 @@ FORM_TEXT = """
 ୨୧ Nama Telegram + Username :
 ୨୧ Jumlah Diamond :
 ୨୧ ID Game :
-୨୧ Payment : 💳 /pay
 ୨୧ Tag Admin : @disaelyn
 </pre>
+୨୧ Payment : 💳 /pay
+
 ──────୨୧──────
 
 ꒰ 📜 ꒱ notes
@@ -123,81 +144,81 @@ STREAMING_TEXT = """
 
 🎀 Netflix
 
-୨୧ Sharing 1P1U 1 Hari » Rp 5.000
-୨୧ Sharing 1P1U 3 Hari » Rp 10.000
-୨୧ Sharing 1P1U 7 Hari » Rp 15.000
-୨୧ Sharing 1P1U 1 Bulan » Rp 35.000
-୨୧ Semi Private 7 Hari » Rp 25.000
-୨୧ Semi Private 1 Bulan » Rp 45.000
-୨୧ Private 1 Bulan » Rp 170.000
-୨୧ Private 1 Bulan (Request Email) » Rp 210.000
+୨୧ Sharing 1P1U 1d » Rp 5.000
+୨୧ Sharing 1P1U 3d» Rp 10.000
+୨୧ Sharing 1P1U 7d » Rp 15.000
+୨୧ Sharing 1P1U 1b » Rp 35.000
+୨୧ Semi Private 7d » Rp 25.000
+୨୧ Semi Private 1b » Rp 45.000
+୨୧ Private 1b » Rp 170.000
+୨୧ Private 1b (Request Email) » Rp 210.000
 
 ──────୨୧──────
 
 🎀 WeTV
 
-୨୧ Sharing 1 Bulan » Rp 10.000
-୨୧ Private 1 Bulan » Tanyakan Admin
+୨୧ Sharing 1b » Rp 10.000
+୨୧ Private 1b» Tanyakan Admin
 
 ──────୨୧──────
 
 🎀 Youku
 
-୨୧ Sharing 1 Bulan » Rp 10.000
-୨୧ Sharing 3 Bulan » Rp 20.000
-୨୧ Private 1 Bulan » Rp 35.000
+୨୧ Sharing 1b » Rp 10.000
+୨୧ Sharing 3b » Rp 20.000
+୨୧ Private 1b » Rp 35.000
 
 ──────୨୧──────
 
 🎀 Prime Video
 
-୨୧ Sharing 1 Bulan » Rp 10.000
-୨୧ Private 1 Bulan » Rp 20.000
+୨୧ Sharing 1b » Rp 10.000
+୨୧ Private 1b » Rp 20.000
 
 ──────୨୧──────
 
 🎀 YouTube Premium
 
-୨୧ FamPlan 1 Bulan » Rp 10.000
-୨୧ IndiPlan 1 Bulan (B) » Rp 12.000
-୨୧ IndiPlan 1 Bulan (S) » Rp 15.000
+୨୧ FamPlan 1b » Rp 10.000
+୨୧ IndiPlan 1b (B) » Rp 12.000
+୨୧ IndiPlan 1b (S) » Rp 15.000
 
 ──────୨୧──────
 
 🎀 Viu
 
-୨୧ Anti Limit 1 Bulan » Rp 1.000
-୨୧ Anti Limit 3 Tahun » Rp 5.000
+୨୧ Anti Limit 1b » Rp 1.000
+୨୧ Anti Limit 3y » Rp 5.000
 
 ──────୨୧──────
 
 🎀 Bstation
 
-୨୧ Sharing 1 Bulan » Rp 10.000
-୨୧ Sharing 3 Bulan » Rp 20.000
-୨୧ Private 1 Bulan » Rp 40.000
+୨୧ Sharing 1b » Rp 10.000
+୨୧ Sharing 3b » Rp 20.000
+୨୧ Private 1b » Rp 40.000
 
 ──────୨୧──────
 
 🎀 IQIYI
 
-୨୧ Standar 1 Bulan » Rp 10.000
-୨୧ Standar Private 1 Bulan » Rp 25.000
-୨୧ Premium 1 Bulan » Rp 15.000
+୨୧ Standar 1b » Rp 10.000
+୨୧ Standar Private 1b » Rp 25.000
+୨୧ Premium 1b » Rp 15.000
 
 ──────୨୧──────
 
 🎀 LokLok
 
-୨୧ Sharing Basic 1 Bulan » Rp 20.000
-୨୧ Sharing Standar 1 Bulan » Rp 25.000
+୨୧ Sharing Basic 1b » Rp 20.000
+୨୧ Sharing Standar 1b » Rp 25.000
 
 ──────୨୧──────
 
 🎀 Vidio
 
-୨୧ Sharing Mobile 1 Bulan » Rp 25.000
-୨୧ Private Mobile 1 Bulan » Rp 35.000
+୨୧ Sharing Mobile 1b » Rp 25.000
+୨୧ Private Mobile 1b » Rp 35.000
 
 ──────୨୧──────
 
@@ -216,46 +237,46 @@ EDITING_TEXT = """
 
 🎀 Canva
 
-୨୧ Member 1 Hari » Rp 500
-୨୧ Member 7 Hari » Rp 1.000
-୨୧ Member 1 Bulan » Rp 2.000
-୨୧ Head 1 Bulan » Rp 10.000
+୨୧ Member 1d » Rp 500
+୨୧ Member 7d » Rp 1.000
+୨୧ Member 1b » Rp 2.000
+୨୧ Head 1b » Rp 10.000
 ୨୧ Education Lifetime » Rp 15.000
 
 ──────୨୧──────
 
 🎀 CapCut
 
-୨୧ Sharing 7 Hari » Rp 5.000
-୨୧ Sharing 1 Bulan » Rp 10.000
-୨୧ Private 7 Hari » Rp 7.000
-୨୧ Private 1 Bulan » Rp 15.000
+୨୧ Sharing 7d » Rp 5.000
+୨୧ Sharing 1b » Rp 10.000
+୨୧ Private 7d » Rp 7.000
+୨୧ Private 1b » Rp 15.000
 
 ──────୨୧──────
 
 🎀 PicsArt
 
-୨୧ Sharing 1 Bulan » Rp 10.000
-୨୧ Private 1 Bulan » Rp 15.000
+୨୧ Sharing 1b » Rp 10.000
+୨୧ Private 1b » Rp 15.000
 
 ──────୨୧──────
 
 🎀 Meitu
 
-୨୧ Private 7 Hari (Android) » Rp 10.000
+୨୧ Private 7d (Android) » Rp 10.000
 
 ──────୨୧──────
 
 🎀 Wink
 
-୨୧ Private 7 Hari (Android) » Rp 10.000
+୨୧ Private 7d (Android) » Rp 10.000
 
 ──────୨୧──────
 
 🎀 Alight Motion
 
-୨୧ Private 1 Year » Rp 5.000
-୨୧ Private 1 Year (iOS) » Rp 10.000
+୨୧ Private 1y » Rp 5.000
+୨୧ Private 1y (iOS) » Rp 10.000
 
 ──────୨୧──────
 
@@ -273,44 +294,44 @@ OTHER_TEXT = """
 
 🎀 Spotify Premium
 
-୨୧ FamPlan 1 Bulan » Rp 25.000
-୨୧ IndiPlan 1 Bulan » Rp 30.000
+୨୧ FamPlan 1b » Rp 25.000
+୨୧ IndiPlan 1b » Rp 30.000
 
 ──────୨୧──────
 
 🎀 Apple Music
 
-୨୧ iMess 1 Bulan » Rp 10.000
+୨୧ iMess 1b » Rp 10.000
 
 ──────୨୧──────
 
 🎀 ChatGPT Plus
 
-୨୧ Sharing 1 Bulan (NoGar) » Rp 10.000
-୨୧ Sharing 1 Bulan (FullGar) » Rp 20.000
+୨୧ Sharing 1b (NoGar) » Rp 10.000
+୨୧ Sharing 1b (FullGar) » Rp 20.000
 
 ──────୨୧──────
 
 🎀 Gemini AI
 
-୨୧ Via Invite 1 Bulan » Rp 12.000
-୨୧ Via Invite 2 Bulan » Rp 18.000
-୨୧ Via Invite 3 Bulan » Rp 25.000
-୨୧ Via Invite 4 Bulan » Rp 30.000
+୨୧ Via Invite 1b » Rp 12.000
+୨୧ Via Invite 2b » Rp 18.000
+୨୧ Via Invite 3b » Rp 25.000
+୨୧ Via Invite 4b » Rp 30.000
 
 ──────୨୧──────
 
 🎀 GetContact
 
-୨୧ Premium 1 Bulan » Rp 15.000
+୨୧ Premium 1b » Rp 15.000
 ୨୧ Cek Nomor GTC » Rp 10.000
 
 ──────୨୧──────
 
 🎀 Grok AI
 
-୨୧ 7 Hari Private » Rp 15.000
-୨୧ 14 Hari Private » Rp 25.000
+୨୧ 7d Private » Rp 15.000
+୨୧ 14d Private » Rp 25.000
 
 ──────୨୧──────
 
