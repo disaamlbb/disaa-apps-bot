@@ -386,13 +386,13 @@ ML_TEXT = """
 thank you for shopping at
 𓇼 Disa Apps ⭑.ᐟ 🎀
 """
-
 # =========================
 # HANDLER
 # =========================
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     name = update.effective_user.first_name
+
     await update.message.reply_text(
         START_TEXT.format(name=name)
     )
@@ -424,10 +424,37 @@ async def ff(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def ml(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(ML_TEXT)
 
+# =========================
+# AUTO WELCOME MEMBER BARU
+# =========================
+
+async def welcome_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    for member in update.message.new_chat_members:
+        await update.message.reply_text(
+            START_TEXT.format(name=member.first_name)
+        )
+
+# =========================
+# UNKNOWN COMMAND
+# =========================
+
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "୨ৎ command tidak ditemukan ♡\n\nsilakan gunakan:\n୨୧ /pl\n୨୧ /form"
+        """
+୨ৎ command tidak ditemukan ♡
+
+silakan gunakan:
+୨୧ /pl
+୨୧ /form
+
+thank you for choosing
+𓇼 Disa Apps ⭑.ᐟ 🎀
+"""
     )
+
+# =========================
+# APP
+# =========================
 
 app = ApplicationBuilder().token(BOT_TOKEN).build()
 
@@ -440,6 +467,13 @@ app.add_handler(CommandHandler("editing", editing))
 app.add_handler(CommandHandler("other", other))
 app.add_handler(CommandHandler("ff", ff))
 app.add_handler(CommandHandler("ml", ml))
+
+app.add_handler(
+    MessageHandler(
+        filters.StatusUpdate.NEW_CHAT_MEMBERS,
+        welcome_member
+    )
+)
 
 app.add_handler(
     MessageHandler(filters.COMMAND, unknown)
