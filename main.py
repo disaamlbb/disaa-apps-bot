@@ -19,7 +19,7 @@ Welcome to Disa Apps 🎀⭑.ᐟ
 
   ୨୧ pricelist ─ /pl
   ୨୧ format order ─ /form
-  ୨୧ testimonials ─ @disaaproofs
+  ୨୧ proof's ─ @disaaproofs
 
 ─────୨୧─────
 
@@ -56,7 +56,7 @@ PL_TEXT = """
 
 FORM_TEXT = """
 ୨ৎ 📋 Format Order ⭑.ᐟ
-
+<pre>
 🎀 All Premium Apps
 
 ୨୧ Nama Telegram + Username :
@@ -65,9 +65,9 @@ FORM_TEXT = """
 ୨୧ Durasi :
 ୨୧ Payment : 💳 /pay
 ୨୧ Tag Admin : @disaelyn
-
+</pre>
 ──────୨୧──────
-
+<pre>
 🎀 Top Up Game ML
 
 ୨୧ Nama Telegram + Username :
@@ -76,9 +76,9 @@ FORM_TEXT = """
 ୨୧ Server :
 ୨୧ Payment : 💳 /pay
 ୨୧ Tag Admin : @disaelyn
-
+</pre>
 ──────୨୧──────
-
+<pre>
 🎀 Top Up Game FF
 
 ୨୧ Nama Telegram + Username :
@@ -86,7 +86,7 @@ FORM_TEXT = """
 ୨୧ ID Game :
 ୨୧ Payment : 💳 /pay
 ୨୧ Tag Admin : @disaelyn
-
+</pre>
 ──────୨୧──────
 
 ꒰ 📜 ꒱ notes
@@ -94,7 +94,6 @@ FORM_TEXT = """
 ♡ pastikan data yang dikirim sudah benar
 ♡ pastikan ID game sudah benar sebelum order
 ♡ kesalahan data bukan tanggung jawab admin
-♡ mohon tunggu proses sesuai antrian
 
 thank you for shopping at
 𓇼 Disa Apps ⭑.ᐟ 🎀
@@ -104,8 +103,7 @@ PAY_TEXT = """
 ୨ৎ Payment QRIS ⭑.ᐟ
 
 ♡ silakan melakukan pembayaran melalui QRIS di atas
-♡ kirim bukti transfer ke @disaelyn
-♡ sertakan format order dan bukti transfer saat menghubungi admin
+♡ kirim bukti transfer & sertakan format order ke @disaelyn
 
 ──────୨୧──────
 
@@ -115,7 +113,6 @@ PAY_TEXT = """
 ♡ order = setuju dengan seluruh ketentuan yang berlaku
 ♡ no refund setelah pesanan diproses
 ♡ garansi mengikuti keterangan pada masing-masing produk
-♡ claim wajib disertai bukti berupa screenshot atau screen record
 ♡ keterlambatan respon dapat terjadi di luar jam operasional admin
 
 thank you for shopping at
@@ -126,10 +123,10 @@ STREAMING_TEXT = """
 
 🎀 Netflix
 
-୨୧ Sharing 1 User 1 Hari » Rp 5.000
-୨୧ Sharing 1 User 3 Hari » Rp 10.000
-୨୧ Sharing 1 User 7 Hari » Rp 15.000
-୨୧ Sharing 1 User 1 Bulan » Rp 35.000
+୨୧ Sharing 1P1U 1 Hari » Rp 5.000
+୨୧ Sharing 1P1U 3 Hari » Rp 10.000
+୨୧ Sharing 1P1U 7 Hari » Rp 15.000
+୨୧ Sharing 1P1U 1 Bulan » Rp 35.000
 ୨୧ Semi Private 7 Hari » Rp 25.000
 ୨୧ Semi Private 1 Bulan » Rp 45.000
 ୨୧ Private 1 Bulan » Rp 170.000
@@ -207,7 +204,7 @@ STREAMING_TEXT = """
 ꒰ 📜 ꒱ notes
 
 ♡ harga dapat berubah sewaktu-waktu
-♡ mohon konfirmasi stok sebelum order
+♡ mohon tanyakan stok sebelum order
 ♡ garansi sesuai masa aktif produk
 
 thank you for shopping at
@@ -265,7 +262,7 @@ EDITING_TEXT = """
 ꒰ 📜 ꒱ notes
 
 ♡ harga dapat berubah sewaktu-waktu
-♡ mohon konfirmasi stok sebelum order
+♡ mohon tanyakan stok sebelum order
 ♡ garansi sesuai masa aktif produk
 
 thank you for shopping at
@@ -289,8 +286,8 @@ OTHER_TEXT = """
 
 🎀 ChatGPT Plus
 
-୨୧ Sharing 1 Bulan (No Garansi) » Rp 10.000
-୨୧ Sharing 1 Bulan (Full Garansi) » Rp 20.000
+୨୧ Sharing 1 Bulan (NoGar) » Rp 10.000
+୨୧ Sharing 1 Bulan (FullGar) » Rp 20.000
 
 ──────୨୧──────
 
@@ -320,7 +317,7 @@ OTHER_TEXT = """
 ꒰ 📜 ꒱ notes
 
 ♡ harga dapat berubah sewaktu-waktu
-♡ mohon konfirmasi stok sebelum order
+♡ mohon tanyakan stok sebelum order
 ♡ garansi sesuai masa aktif produk
 
 thank you for shopping at
@@ -350,7 +347,7 @@ FF_TEXT = """
 ꒰ 📜 ꒱ notes
 
 ♡ proses menggunakan ID game
-♡ mohon konfirmasi stok sebelum order
+♡ mohon tanyakan stok sebelum order
 ♡ produk yang tidak ada di list bisa ditanyakan ke admin
 
 thank you for shopping at
@@ -380,7 +377,7 @@ ML_TEXT = """
 ꒰ 📜 ꒱ notes
 
 ♡ proses menggunakan ID game & server
-♡ mohon konfirmasi stok sebelum order
+♡ mohon tanyakan stok sebelum order
 ♡ produk yang tidak ada di list bisa ditanyakan ke admin
 
 thank you for shopping at
@@ -401,7 +398,10 @@ async def pl(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(PL_TEXT)
 
 async def form(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(FORM_TEXT)
+    await update.message.reply_text(
+        FORM_TEXT,
+        parse_mode="HTML"
+    )
 
 async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_photo(
