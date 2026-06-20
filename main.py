@@ -1,268 +1,425 @@
 import os
-from telegram import (
-    Update,
-    ReplyKeyboardMarkup,
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-)
+from telegram import Update
 from telegram.ext import (
-    ApplicationBuilder,
-    CommandHandler,
-    MessageHandler,
-    ContextTypes,
-    filters,
+ApplicationBuilder,
+CommandHandler,
+MessageHandler,
+ContextTypes,
+filters,
 )
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 START_TEXT = """
-୨ৎ Disaa Premium Apps ⭑.ᐟ
+୨ৎ 𓇼 Hello, {name} ♡
 
-Silakan pilih menu yang tersedia pada keyboard di bawah untuk melihat pricelist dan informasi lainnya yaaa...🎀
+Welcome to Disa Apps 🎀⭑.ᐟ
+
+୨୧ pricelist ─ /pl
+୨୧ format order ─ /form
+୨୧ testimonials ─ @disaaproofs
+
+─────୨୧─────
+
+hope you enjoy your stay and happy shopping with us ✦
+thank you for choosing
+𓇼 Disa Apps⭑.ᐟ 🎀
 """
 
-STREAMING_TEXT = """
-#Pricelist STREAMING APPS ─
+PL_TEXT = """
+✦ — Pricelist Menu ♡
 
-⠀⠀ᝰ.ᐟ Netflix
-⤿ sharing 1u 1d :: Rp 5.000
-⤿ sharing 1u 3d :: Rp 10.000
-⤿ sharing 1u 7d :: Rp 15.000
-⤿ sharing 1u 1b :: Rp 35.000
-⤿ semi priv 7d :: Rp 25.000
-⤿ semi priv 1b :: Rp 45.000
-⤿ private 1b :: Rp 170.000
-⤿ private 1b :: Rp 210.000 (req email bisa dari mu)
+🎀 Premium Apps
+୨୧ /streaming ─ Streaming Apps
+୨୧ /editing ─ Editing Apps
+୨୧ /other ─ Music Apps, AI tools, dll
 
-⠀⠀ᝰ.ᐟ WeTV
-⤿ sharing 1 bulan :: Rp 10.000
-⤿ private 1 bulan :: tanyakan
+──────୨୧──────
 
-⠀⠀ᝰ.ᐟ Youku
-⤿ sharing 1 bulan :: Rp 10.000
-⤿ sharing 3 bulan :: Rp 20.000
-⤿ private 1 bulan :: Rp 35.000
+🎮 Top Up Games
+୨୧ /ff ─ diamond free fire
+୨୧ /ml ─ diamond mobile legends
 
-⠀⠀ᝰ.ᐟ Prime Video
-⤿ sharing 1 bulan :: Rp 10.000
-⤿ private 1 bulan :: Rp 20.000
+──────୨୧──────
 
-⠀⠀ᝰ.ᐟ YouTube
-⤿ famplan 1 bulan :: Rp 10.000
-⤿ indiplan 1 bulan (b) :: Rp 12.000
-⤿ indiplan 1 bulan (s) :: Rp 15.000
+📝 Order Menu
+୨୧ /form ─ format order
 
-⠀⠀ᝰ.ᐟ Viu
-⤿ anti limit 1 bulan :: Rp 1.000
-⤿ anti limit 3 tahun :: Rp 5.000
+──────୨୧──────
 
-⠀⠀ᝰ.ᐟ Bstation
-⤿ sharing 1 bulan :: Rp 10.000
-⤿ sharing 3 bulan :: Rp 20.000
-⤿ private 1 bulan :: Rp 40.000
+♡ silakan pilih menu yang dibutuhkan
+♡ fast response & trusted service
+♡ happy shopping at Disa Apps 🎀
+"""
 
-⠀⠀ᝰ.ᐟ IQIYI
-⤿ standar 1 bulan :: Rp 10.000
-⤿ standar priv 1 bulan :: Rp 25.000
-⤿ premium 1 bulan :: Rp 15.000
+FORM_TEXT = """
+୨ৎ 📋 Format Order ⭑.ᐟ
 
-⠀⠀ᝰ.ᐟ LokLok
-⤿ sharing basic 1 bulan :: Rp 20.000
-⤿ sharing standar 1 bulan :: Rp 25.000
+🎀 All Premium Apps
 
-⠀⠀ᝰ.ᐟ Vidio
-⤿ sharing mobile 1 bulan :: Rp 25.000
-⤿ private mobile 1 bulan :: Rp 35.000
+୨୧ Nama Telegram + Username :
+୨୧ Nama Apk :
+୨୧ Jenis Apk :
+୨୧ Durasi :
+୨୧ Payment : 💳 Pay Here
+୨୧ Tag Admin : @disaelyn
 
-── ⋆⋅☆⋅⋆ ──
-୨ৎ Harga dapat berubah sewaktu-waktu
-୨ৎ Tanyakan stok sebelum order
-୨ৎ Garansi sesuai masa aktif"""
+──────୨୧──────
 
-EDITING_TEXT = """
-#Pricelist EDITING APPS ─
+🎀 Top Up Game ML
 
-⠀⠀ᝰ.ᐟ Canva
-⤿ member 1 hari :: Rp 500
-⤿ member 7 hari :: Rp 1.000
-⤿ member 1 bulan :: Rp 2.000
-⤿ head 1 bulan :: Rp 10.000
-⤿ education lifetime :: Rp 15.000
+୨୧ Nama Telegram + Username :
+୨୧ Jumlah Diamond :
+୨୧ ID Game :
+୨୧ Server :
+୨୧ Payment : 💳 Pay Here
+୨୧ Tag Admin : @disaelyn
 
-⠀⠀ᝰ.ᐟ CapCut
-⤿ sharing 7 hari :: Rp 5.000
-⤿ sharing 1 bulan :: Rp 10.000
-⤿ private 7 hari :: Rp 7.000
-⤿ private 1 bulan :: Rp 15.000
+──────୨୧──────
 
-⠀⠀ᝰ.ᐟ PicsArt
-⤿ sharing 1 bulan :: Rp 10.000
-⤿ private 1 bulan :: Rp 15.000
+🎀 Top Up Game FF
 
-⠀⠀ᝰ.ᐟ Meitu
-⤿ private 7 hari andro :: Rp 10.000
+୨୧ Nama Telegram + Username :
+୨୧ Jumlah Diamond :
+୨୧ ID Game :
+୨୧ Payment : 💳 Pay Here
+୨୧ Tag Admin : @disaelyn
 
-⠀⠀ᝰ.ᐟ Wink
-⤿ private 7 hari andro :: Rp 10.000
+──────୨୧──────
 
-⠀⠀ᝰ.ᐟ Alight Motion
-⤿ private 1 year :: Rp 5.000
-⤿ private 1 year IOS :: Rp 10.000
+꒰ 📜 ꒱ notes
 
-── ⋆⋅☆⋅⋆ ──
-୨ৎ Harga dapat berubah sewaktu-waktu
-୨ৎ Tanyakan stok sebelum order
-୨ৎ Garansi sesuai masa aktif"""
+♡ pastikan data yang dikirim sudah benar
+♡ pastikan ID game sudah benar sebelum order
+♡ kesalahan data bukan tanggung jawab admin
+♡ mohon tunggu proses sesuai antrian
 
-MUSIC_TEXT = """ 
-#Pricelist MUSIC NEED'S ─
-
-⠀⠀ᝰ.ᐟ Spotify 
-⤿ famplan 1 bulan :: Rp 25.000 
-⤿ indiplan 1 bulan :: Rp 30.000
-
-⠀⠀ᝰ.ᐟ Apple Music 
-⤿ imess 1 bulan :: Rp 10.000
-
-── ⋆⋅☆⋅⋆ ──
-
-#Pricelist OTHER NEED'S ─
-
-⠀⠀ᝰ.ᐟ ChatGPT 
-⤿ sharing 1 bulan nogar :: Rp 10.000 
-⤿ sharing 1 bulan fullgar :: Rp 20.000
-
-⠀⠀ᝰ.ᐟ Gemini AI 
-⤿ via Invite 1b :: Rp 12.000 
-⤿ via Invite 2b :: Rp 18.000 
-⤿ via Invite 3b :: Rp 25.000 
-⤿ via Invite 4b :: Rp 30.000
-
-⠀⠀ᝰ.ᐟ Get Contact 
-⤿ Premium 1b :: Rp 15.000 
-⤿ Cek Nomor GTC :: Rp 10.000
-
-⠀⠀ᝰ.ᐟ Grok AI 
-⤿ 7 Hari Private :: Rp 15.000 
-⤿ 14 Hari Private :: Rp 25.000
-
-── ⋆⋅☆⋅⋆ ──
-୨ৎ Harga dapat berubah sewaktu-waktu
-୨ৎ Tanyakan stok sebelum order
-୨ৎ Garansi sesuai masa aktif """
+thank you for shopping at
+𓇼 Disa Apps ⭑.ᐟ 🎀
+"""
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = [
-        ["✦ Streaming ✦", "✦ Editing ✦"],
-        ["✦ Other Apps ✦"],
-        ["✦ Order & Inform ✦"],
-    ]
+name = update.effective_user.first_name
+await update.message.reply_text(
+START_TEXT.format(name=name)
+)
 
-    reply_markup = ReplyKeyboardMarkup(
-        keyboard,
-        resize_keyboard=True
-    )
+async def pl(update: Update, context: ContextTypes.DEFAULT_TYPE):
+await update.message.reply_text(PL_TEXT)
 
-    await update.message.reply_text(
-        START_TEXT,
-        reply_markup=reply_markup
-    )
+async def form(update: Update, context: ContextTypes.DEFAULT_TYPE):
+await update.message.reply_text(FORM_TEXT)
+STREAMING_TEXT = """
+୨ৎ 📺 Streaming Apps ⭑.ᐟ
 
+🎀 Netflix
 
-async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = update.message.text
+୨୧ Sharing 1 User 1 Hari » Rp 5.000
+୨୧ Sharing 1 User 3 Hari » Rp 10.000
+୨୧ Sharing 1 User 7 Hari » Rp 15.000
+୨୧ Sharing 1 User 1 Bulan » Rp 35.000
+୨୧ Semi Private 7 Hari » Rp 25.000
+୨୧ Semi Private 1 Bulan » Rp 45.000
+୨୧ Private 1 Bulan » Rp 170.000
+୨୧ Private 1 Bulan (Request Email) » Rp 210.000
 
-    if text == "✦ Streaming ✦":
-        await update.message.reply_text(STREAMING_TEXT)
+──────୨୧──────
 
-    elif text == "✦ Editing ✦":
-        await update.message.reply_text(EDITING_TEXT)
+🎀 WeTV
 
-    elif text == "✦ Other Apps ✦":
-        await update.message.reply_text(MUSIC_TEXT)
+୨୧ Sharing 1 Bulan » Rp 10.000
+୨୧ Private 1 Bulan » Tanyakan Admin
 
-    elif text == "✦ Order & Inform ✦":
-        keyboard = [
-            [
-                InlineKeyboardButton(
-                    "✦ Chat Admin @disaelyn ✦",
-                    url="https://t.me/disaelyn"
-                )
-            ]
-        ]
+──────୨୧──────
 
-        reply_markup = InlineKeyboardMarkup(keyboard)
+🎀 Youku
 
-        await update.message.reply_text(
-            """
-୨ৎ Order & Information ⭑.ᐟ
+୨୧ Sharing 1 Bulan » Rp 10.000
+୨୧ Sharing 3 Bulan » Rp 20.000
+୨୧ Private 1 Bulan » Rp 35.000
 
-📑 inform's
-• kode b = bulan
-• kode d = day (hari)
-• kode y/t = tahun
-• harga dapat berubah sewaktu-waktu
-• harap tanyakan stok sebelum order
-• garansi sesuai masa aktif produk
-• produk nogar tidak memiliki garansi
-• wajib mengirim bukti login untuk aktivasi garansi
-• akun yang sudah berhasil login tidak dapat dibatalkan atau direfund
-• order = dianggap telah membaca dan menyetujui seluruh syarat & ketentuan
+──────୨୧──────
 
-── ⋆⋅☆⋅⋆ ──
+🎀 Prime Video
 
-Untuk melakukan order atau menanyakan produk, silakan hubungi admin melalui tombol di bawah ini 🎀
-            """,
-            reply_markup=reply_markup
-        )
+୨୧ Sharing 1 Bulan » Rp 10.000
+୨୧ Private 1 Bulan » Rp 20.000
 
+──────୨୧──────
+
+🎀 YouTube Premium
+
+୨୧ FamPlan 1 Bulan » Rp 10.000
+୨୧ IndiPlan 1 Bulan (B) » Rp 12.000
+୨୧ IndiPlan 1 Bulan (S) » Rp 15.000
+
+──────୨୧──────
+
+🎀 Viu
+
+୨୧ Anti Limit 1 Bulan » Rp 1.000
+୨୧ Anti Limit 3 Tahun » Rp 5.000
+
+──────୨୧──────
+
+🎀 Bstation
+
+୨୧ Sharing 1 Bulan » Rp 10.000
+୨୧ Sharing 3 Bulan » Rp 20.000
+୨୧ Private 1 Bulan » Rp 40.000
+
+──────୨୧──────
+
+🎀 IQIYI
+
+୨୧ Standar 1 Bulan » Rp 10.000
+୨୧ Standar Private 1 Bulan » Rp 25.000
+୨୧ Premium 1 Bulan » Rp 15.000
+
+──────୨୧──────
+
+🎀 LokLok
+
+୨୧ Sharing Basic 1 Bulan » Rp 20.000
+୨୧ Sharing Standar 1 Bulan » Rp 25.000
+
+──────୨୧──────
+
+🎀 Vidio
+
+୨୧ Sharing Mobile 1 Bulan » Rp 25.000
+୨୧ Private Mobile 1 Bulan » Rp 35.000
+
+──────୨୧──────
+
+꒰ 📜 ꒱ notes
+
+♡ harga dapat berubah sewaktu-waktu
+♡ mohon konfirmasi stok sebelum order
+♡ garansi sesuai masa aktif produk
+
+thank you for shopping at
+𓇼 Disa Apps ⭑.ᐟ 🎀
+"""
+
+EDITING_TEXT = """
+୨ৎ 🎨 Editing Apps ⭑.ᐟ
+
+🎀 Canva
+
+୨୧ Member 1 Hari » Rp 500
+୨୧ Member 7 Hari » Rp 1.000
+୨୧ Member 1 Bulan » Rp 2.000
+୨୧ Head 1 Bulan » Rp 10.000
+୨୧ Education Lifetime » Rp 15.000
+
+──────୨୧──────
+
+🎀 CapCut
+
+୨୧ Sharing 7 Hari » Rp 5.000
+୨୧ Sharing 1 Bulan » Rp 10.000
+୨୧ Private 7 Hari » Rp 7.000
+୨୧ Private 1 Bulan » Rp 15.000
+
+──────୨୧──────
+
+🎀 PicsArt
+
+୨୧ Sharing 1 Bulan » Rp 10.000
+୨୧ Private 1 Bulan » Rp 15.000
+
+──────୨୧──────
+
+🎀 Meitu
+
+୨୧ Private 7 Hari (Android) » Rp 10.000
+
+──────୨୧──────
+
+🎀 Wink
+
+୨୧ Private 7 Hari (Android) » Rp 10.000
+
+──────୨୧──────
+
+🎀 Alight Motion
+
+୨୧ Private 1 Year » Rp 5.000
+୨୧ Private 1 Year (iOS) » Rp 10.000
+
+──────୨୧──────
+
+꒰ 📜 ꒱ notes
+
+♡ harga dapat berubah sewaktu-waktu
+♡ mohon konfirmasi stok sebelum order
+♡ garansi sesuai masa aktif produk
+
+thank you for shopping at
+𓇼 Disa Apps ⭑.ᐟ 🎀
+"""
+
+async def streaming(update: Update, context: ContextTypes.DEFAULT_TYPE):
+await update.message.reply_text(STREAMING_TEXT)
+
+async def editing(update: Update, context: ContextTypes.DEFAULT_TYPE):
+await update.message.reply_text(EDITING_TEXT)
+OTHER_TEXT = """
+୨ৎ 🤍 Other Apps ⭑.ᐟ
+
+🎀 Spotify Premium
+
+୨୧ FamPlan 1 Bulan » Rp 25.000
+୨୧ IndiPlan 1 Bulan » Rp 30.000
+
+──────୨୧──────
+
+🎀 Apple Music
+
+୨୧ iMess 1 Bulan » Rp 10.000
+
+──────୨୧──────
+
+🎀 ChatGPT Plus
+
+୨୧ Sharing 1 Bulan (No Garansi) » Rp 10.000
+୨୧ Sharing 1 Bulan (Full Garansi) » Rp 20.000
+
+──────୨୧──────
+
+🎀 Gemini AI
+
+୨୧ Via Invite 1 Bulan » Rp 12.000
+୨୧ Via Invite 2 Bulan » Rp 18.000
+୨୧ Via Invite 3 Bulan » Rp 25.000
+୨୧ Via Invite 4 Bulan » Rp 30.000
+
+──────୨୧──────
+
+🎀 GetContact
+
+୨୧ Premium 1 Bulan » Rp 15.000
+୨୧ Cek Nomor GTC » Rp 10.000
+
+──────୨୧──────
+
+🎀 Grok AI
+
+୨୧ 7 Hari Private » Rp 15.000
+୨୧ 14 Hari Private » Rp 25.000
+
+──────୨୧──────
+
+꒰ 📜 ꒱ notes
+
+♡ harga dapat berubah sewaktu-waktu
+♡ mohon konfirmasi stok sebelum order
+♡ garansi sesuai masa aktif produk
+
+thank you for shopping at
+𓇼 Disa Apps ⭑.ᐟ 🎀
+"""
+
+FF_TEXT = """
+୨ৎ 🎮 Free Fire Topup ⭑.ᐟ
+
+🎀 Diamond List
+
+୨୧ 5 DM » Rp 2.500
+୨୧ 10 DM » Rp 3.500
+୨୧ 12 DM » Rp 4.000
+୨୧ 20 DM » Rp 6.000
+୨୧ 30 DM » Rp 8.000
+୨୧ 50 DM » Rp 10.500
+୨୧ 80 DM » Rp 15.000
+୨୧ 100 DM » Rp 19.000
+୨୧ 120 DM » Rp 21.500
+୨୧ 140 DM » Rp 25.500
+୨୧ 160 DM » Rp 28.000
+୨୧ 400 DM » Rp 65.000
+
+──────୨୧──────
+
+꒰ 📜 ꒱ notes
+
+♡ proses menggunakan ID game
+♡ mohon konfirmasi stok sebelum order
+♡ produk yang tidak ada di list bisa ditanyakan ke admin
+
+thank you for shopping at
+𓇼 Disa Apps ⭑.ᐟ 🎀
+"""
+
+ML_TEXT = """
+୨ৎ 🎮 Mobile Legends Topup ⭑.ᐟ
+
+🎀 Diamond List
+
+୨୧ 5 DM » Rp 2.500
+୨୧ 10 DM » Rp 3.500
+୨୧ 12 DM » Rp 4.000
+୨୧ 20 DM » Rp 6.000
+୨୧ 25 DM » Rp 6.500
+୨୧ 30 DM » Rp 7.500
+୨୧ 50 DM » Rp 10.000
+୨୧ 55 DM » Rp 10.500
+୨୧ 70 DM » Rp 12.500
+୨୧ 75 DM » Rp 13.500
+୨୧ 80 DM » Rp 14.500
+୨୧ 90 DM » Rp 16.000
+
+──────୨୧──────
+
+꒰ 📜 ꒱ notes
+
+♡ proses menggunakan ID game & server
+♡ mohon konfirmasi stok sebelum order
+♡ produk yang tidak ada di list bisa ditanyakan ke admin
+
+thank you for shopping at
+𓇼 Disa Apps ⭑.ᐟ 🎀
+"""
+
+async def other(update: Update, context: ContextTypes.DEFAULT_TYPE):
+await update.message.reply_text(OTHER_TEXT)
+
+async def ff(update: Update, context: ContextTypes.DEFAULT_TYPE):
+await update.message.reply_text(FF_TEXT)
+
+async def ml(update: Update, context: ContextTypes.DEFAULT_TYPE):
+await update.message.reply_text(ML_TEXT)
+
+async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
+await update.message.reply_text(
+"""
+୨ৎ command tidak ditemukan ♡
+
+silakan gunakan:
+୨୧ /pl
+୨୧ /form
+
+thank you for choosing
+𓇼 Disa Apps ⭑.ᐟ 🎀
+"""
+)
 
 app = ApplicationBuilder().token(BOT_TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("pl", pl))
+app.add_handler(CommandHandler("form", form))
+app.add_handler(CommandHandler("streaming", streaming))
+app.add_handler(CommandHandler("editing", editing))
+app.add_handler(CommandHandler("other", other))
+app.add_handler(CommandHandler("ff", ff))
+app.add_handler(CommandHandler("ml", ml))
 
 app.add_handler(
-    MessageHandler(
-        filters.TEXT & ~filters.COMMAND,
-        button_handler
-    )
+MessageHandler(filters.COMMAND, unknown)
 )
 
-async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    for member in update.message.new_chat_members:
-
-        await update.message.reply_text(
-            f"""
-୨ৎ Welcome to Disaa Apps ♡
-
-Halloww {member.first_name} 🤍
-
-Silakan ketik /start untuk melihat seluruh produk,
-pricelist, dan informasi yang tersedia.
-
-Happy shopping ♡
-"""
-        )
-
-app.add_handler(
-    MessageHandler(
-        filters.StatusUpdate.NEW_CHAT_MEMBERS,
-        welcome
-    )
+if name == "main":
+app.run_polling(
+allowed_updates=Update.ALL_TYPES
 )
-async def get_file_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    file_id = update.message.photo[-1].file_id
-
-    await update.message.reply_text(
-        f"FILE ID:\n\n{file_id}"
-    )
-app.add_handler(
-    MessageHandler(
-        filters.PHOTO,
-        get_file_id
-    )
-)
-if __name__ == "__main__":
-    app.run_polling(
-        allowed_updates=Update.ALL_TYPES
-    )
